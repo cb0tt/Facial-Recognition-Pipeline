@@ -1,0 +1,2 @@
+3.6.9 (default, Oct  8 2020, 12:12:24)  [GCC 8.4.0]
+Platform: Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-Ubuntu-18.04-bionic
