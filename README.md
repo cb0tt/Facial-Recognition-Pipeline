@@ -130,7 +130,7 @@ bash -lc "python medium_facenet/preprocess.py \
   --landmark_path medium_facenet/shape_predictor_68_face_landmarks.dat \
   --image_size 160 --upsample 2"
 ```
-Evaluate, we remove is_train to evaluate these new images without retraining
+#### Evaluate, we remove is_train to evaluate these new images without retraining
 Command:
 ```bash
 docker run --rm -it -v ${PWD}:/app -w /app facenet-pipeline \
@@ -141,7 +141,23 @@ bash -lc "python medium_facenet/train_classifier.py \
   --image_size 160 --batch 64 \
   --min_per_class 1"
 ```
-### Final Thoughts
+##### Example Output:
+'Evaluated on 6 images (kept 6 that matched trained classes)
+Overall accuracy: 1.0000
+
+Sample per-class accuracy (first 10 classes):
+Bill_Gates                     1.000 (2 samples)
+Michael_Jackson                1.000 (2 samples)
+Tom_Hanks                      1.000 (2 samples)'
+### As the number and diversity of evaluation images increases, you get a more realistic and robust measure of accuracy. So if we increase the sample size...
+-More variability (lighting, pose, occlusion, background).
+
+-More opportunities for mistakes (especially between lookalike people).
+
+-Edge cases or noisy images might confuse the model.
+
+---
+## Final Thoughts
 This project successfully combined machine learning (SVM) with deep learning feature extraction (FaceNet) in a fully containerized pipeline. By aligning face images, generating embeddings, and enforcing identity thresholds during training, we created a repeatable system for facial recognition and evaluation. The use of Docker ensures that anyone can reproduce results reliably, making this pipeline practical for both experimentation and deployment.
 #### 🙏 Acknowledgments
 This project was originally inspired by [Cole Murray's facial recognition pipeline tutorial](https://hackernoon.com/building-a-facial-recognition-pipeline-with-deep-learning-in-tensorflow-66e7645015b8). While the core ideas and flow were based on his tutorial, this implementation makes several key changes — including code refactoring, updated preprocessing, classifier handling, and a fully customized execution pipeline designed for learning and reproducibility.
