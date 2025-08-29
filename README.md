@@ -43,7 +43,34 @@ This pipeline demonstrates the end-to-end process of building a face recognition
 - **OpenCV (cv2)** → image preprocessing (resize, color conversion, affine warp)  
 - **scikit-learn** → SVM classifier and evaluation metrics
 ---
-## 🚀 How to Run the Code
+## 📁 Directory Setup (Required Folders)
+make sure the following directories exist in the project root:
+
+## etc/ → Model & Classifier Storage
+
+This folder stores:
+
+The pretrained FaceNet model (.pb) you download
+
+The trained SVM classifier (.pkl) after training
+
+⚠️ These files are too large to upload to GitHub, so they must be downloaded manually.
+Example model: 20180408-102900.pb
+Saved classifier: facenet_svm.pkl
+
+## data/ → All Image Data (Input/Output)
+
+This folder is where your raw images, aligned faces, and new test images live.
+You are expected to structure it like this:
+
+data/
+├── raw/               # Raw images organized in folders by person
+│   └── PersonA/*.jpg
+│   └── PersonB/*.jpg
+├── aligned/           # Aligned output of raw images (auto-generated)
+├── aligned_new/       # Aligned output of test images (auto-generated)
+├── new_images/        # Ra
+
 ### 📥 Required Downloads
 
 Before training or evaluating, download the following files and place them in the correct directories:
@@ -53,14 +80,11 @@ Download:
  📎 [20180408-102900.pb](http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2)
 📁 Place into: `etc/20180408-102900/`
 
-
-
- 
 ### 🔹 2. dlib 68-Point Shape Predictor
 - Source: [dlib model download page (SourceForge)](https://sourceforge.net/projects/dclib/files/)
 - File to download: `shape_predictor_68_face_landmarks.dat.bz2`
-  
-## Lets Run
+---
+### 🚀 How to Run the Code
 ### 1A. Clone the repository
 Run below command,
 ```bash
