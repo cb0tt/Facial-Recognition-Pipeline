@@ -44,6 +44,20 @@ This pipeline demonstrates the end-to-end process of building a face recognition
 - **scikit-learn** → SVM classifier and evaluation metrics
 ---
 ## 🚀 How to Run the Code
+### 📥 Required Downloads
+
+Before training or evaluating, download the following files and place them in the correct directories:
+
+#### 🔹 1. FaceNet Pretrained Model (.pb)
+Download:  
+📎 [20180408-102900.pb](https://drive.google.com/file/d/1G5pLJ8yQvG2bEwZXlJ3lgSyTSakL0T7x/view?usp=sharing)  
+📁 Place into: `etc/20180408-102900/`
+
+#### 🔹 2. dlib Shape Predictor
+Download:  
+📎 [shape_predictor_68_face_landmarks.dat.bz2](http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2)
+2 -d shape_predictor_68_face_landmarks.dat.bz2
+
 ### 1A. Clone the repository
 Run below command,
 ```bash
