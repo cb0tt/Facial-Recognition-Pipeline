@@ -50,14 +50,17 @@ Before training or evaluating, download the following files and place them in th
 
 #### 🔹 1. FaceNet Pretrained Model (.pb)
 Download:  
-📎 [20180408-102900.pb](https://drive.google.com/file/d/1G5pLJ8yQvG2bEwZXlJ3lgSyTSakL0T7x/view?usp=sharing)  
+ 📎 [20180408-102900.pb](http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2)
 📁 Place into: `etc/20180408-102900/`
 
-#### 🔹 2. dlib Shape Predictor
-Download:  
-📎 [shape_predictor_68_face_landmarks.dat.bz2](http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2)
-2 -d shape_predictor_68_face_landmarks.dat.bz2
 
+
+ 
+### 🔹 2. dlib 68-Point Shape Predictor
+- Source: [dlib model download page (SourceForge)](https://sourceforge.net/projects/dclib/files/)
+- File to download: `shape_predictor_68_face_landmarks.dat.bz2`
+  
+## Lets Run
 ### 1A. Clone the repository
 Run below command,
 ```bash
