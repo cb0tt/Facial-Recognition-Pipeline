@@ -3,12 +3,12 @@ import argparse
 import pickle
 import numpy as np
 import cv2
-import tensorflow as tf  # TF 1.x in your Docker
+import tensorflow as tf  
 from typing import Optional, Tuple, List
 
 from align_dlib import AlignDlib  # your class
 
-# ---------- FaceNet loader (same idea as in train_classifier.py) ----------
+
 def load_facenet(pb_path: str):
     """
     Load a frozen FaceNet graph (.pb) into a TF1.x Graph + Session,
@@ -21,13 +21,11 @@ def load_facenet(pb_path: str):
             graph_def = tf.GraphDef()
             graph_def.ParseFromString(f.read())
             tf.import_graph_def(graph_def, name="")
-        # These names are common; if you get a KeyError, print the graph ops and adjust.
         input_t = g.get_tensor_by_name("input:0")
         emb_t   = g.get_tensor_by_name("embeddings:0")
         phase_t = g.get_tensor_by_name("phase_train:0")
     return g, sess, {"input": input_t, "emb": emb_t, "phase": phase_t}
 
-# ---------- Minimal image prep helpers ----------
 def bgr_to_facenet_rgb(img_bgr: np.ndarray, size: int = 160) -> np.ndarray:
     """
     Convert BGR uint8 -> RGB float32 and resize to FaceNet's expected input size.
@@ -43,12 +41,12 @@ def embed_face(sess: tf.Session, tensors: dict, face_rgb_float: np.ndarray) -> n
     Run one aligned face through FaceNet and return a single embedding vector.
     Input must be RGB float32, shape (H, W, C).
     """
-    batch = np.expand_dims(face_rgb_float, axis=0)           # [1, H, W, C]
+    batch = np.expand_dims(face_rgb_float, axis=0)           
     feed = {tensors["input"]: batch, tensors["phase"]: False}
-    emb = sess.run(tensors["emb"], feed_dict=feed)           # [1, D]
-    return emb[0]                                            # [D]
+    emb = sess.run(tensors["emb"], feed_dict=feed)           
+    return emb[0]                                           
 
-# ---------- Align + predict ----------
+#Align + predict
 def detect_and_align(
     image_path: str,
     aligner: AlignDlib,
@@ -81,34 +79,33 @@ def top_k_predictions(
     idxs = np.argsort(probs)[::-1][:k]
     return [(class_names[i], float(probs[i])) for i in idxs]
 
-# ---------- CLI pipeline ----------
 def main(args):
-    # 1) Init aligner (landmark predictor)
+    # 1)Init aligner (landmark predictor)
     aligner = AlignDlib(args.landmark_path)
 
-    # 2) Detect + align the face from the input image
+    # 2)Detect + align the face from the input image
     aligned_bgr = detect_and_align(
         args.image_path, aligner, image_size=args.image_size, upsample_times=args.upsample
     )
     if aligned_bgr is None:
         raise SystemExit("Could not align a face from the input image.")
 
-    # 3) Load FaceNet model
+    # 3)Load FaceNet model
     g, sess, t = load_facenet(args.model_path)
 
-    # 4) Convert aligned face to FaceNet input, then get the embedding
+    # 4)Convert aligned face to FaceNet input, then get the embedding
     aligned_rgb = bgr_to_facenet_rgb(aligned_bgr, size=args.image_size)
     with sess.as_default(), g.as_default():
-        emb = embed_face(sess, t, aligned_rgb)   # shape [D]
+        emb = embed_face(sess, t, aligned_rgb)   
 
-    # 5) Load the trained classifier
+    # 5)Load the trained classifier
     with open(args.classifier_pickle, "rb") as f:
         ckpt = pickle.load(f)
     clf = ckpt["classifier"]
     class_names = ckpt["class_names"]
 
     # 6) Predict probabilities and print top-k
-    probs = clf.predict_proba([emb])[0]  # shape [num_classes]
+    probs = clf.predict_proba([emb])[0]  #shape is num[classes]
     topk = top_k_predictions(probs, class_names, k=args.top_k)
 
     print("\nPrediction (top-{}):".format(args.top_k))
@@ -126,3 +123,4 @@ if __name__ == "__main__":
     ap.add_argument("--top_k", type=int, default=3)
     args = ap.parse_args()
     main(args)
+
