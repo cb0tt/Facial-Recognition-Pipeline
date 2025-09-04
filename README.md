@@ -36,7 +36,7 @@ This pipeline demonstrates the end-to-end process of building a face recognition
 
 ---
 
-## 🛠️ Tools
+## 🛠️ Tools (use Python 3.6-3.7)
 - **Docker** → reproducible environment to run TensorFlow and dependencies  
 - **TensorFlow** → loads the pretrained FaceNet graph and computes embeddings
 - **dlib** → face detection & facial landmark alignment  
