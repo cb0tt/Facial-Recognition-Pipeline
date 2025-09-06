@@ -1,4 +1,4 @@
-# Facial Recognition Pipeline with Deep Learning (TensorFlow + SVM)
+# Facial Recognition Pipeline with Deep Learning
 
 ## 📌 Overview
 
