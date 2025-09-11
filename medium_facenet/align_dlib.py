@@ -1,14 +1,10 @@
 """
-align_dlib.py
---------------
 Wraps dlib face detection and landmark alignment.
 - load the dlib face detector
 - load the shape predictor (shape_predictor_68_face_landmarks.dat)
 - detect faces in an image
-- return aligned face(s)
+- return aligned faces
 """
-
-# medium_facenet/align_dlib.py
 import dlib
 import cv2
 import numpy as np
