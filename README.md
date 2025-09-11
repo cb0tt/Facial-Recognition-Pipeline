@@ -106,14 +106,10 @@ docker run --rm -it -v ${PWD}:/app -w /app facenet-pipeline bash -lc "python med
 ```
 ### 3. Train the classifier
 Run this Command, post training the classifier will be saved to etc/facenet_svm.pkl and print the list of trained classes (identities)
+I filtered out classes that had < 10 images for higher confidence intervals. You can adjust however you'd like, just change 'min_per_class 10'. The more info the svm had to evaluate off of will directly impact its level of confidence in the next step.
 ```bash
-docker run --rm -it -v ${PWD}:/app -w /app facenet-pipeline \
-bash -lc "python medium_facenet/train_classifier.py \
-  --aligned_dir data/aligned \
-  --model_path etc/20180408-102900/20180408-102900.pb \
-  --out_pickle etc/facenet_svm.pkl \
-  --image_size 160 --batch 64 \
-  --min_per_class 10 --is_train"
+docker run --rm -it -v ${PWD}:/app -w /app facenet-pipeline bash -lc "python medium_facenet/train_classifier.py --aligned_dir data/aligned --model_path etc/20180408-102900/20180408-102900.pb --out_pickle etc/facenet_svm.pkl --image_size 160 --batch 64 --min_per_class 10 --is_train"
+
 ```
 ### 4. Evaluate on new images
 In data Make a folder called new_images, data/new_images, add new photos of indentities. **Ensure you use identities that the classifier has been trained on**
