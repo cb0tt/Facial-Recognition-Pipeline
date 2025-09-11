@@ -3,14 +3,12 @@ Run FaceNet on aligned images to get embeddings, then train a classifier (e.g., 
 Saves classifier to disk
 """
 
-# medium_facenet_tutorial/train_classifier.py
 import os, argparse, pickle, glob
 import numpy as np, cv2, tensorflow as tf
 from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score
 from collections import Counter
 
-# ---------- helpers ----------
 def list_images(root):
     exts = {".jpg", ".jpeg", ".png"}
     paths, classes = [], []
@@ -57,7 +55,6 @@ def embed_paths(sess, tensors, paths, batch=64, size=160):
         X.append(E)
     return np.vstack(X) if X else np.zeros((0, 128), np.float32)
 
-# ---------- main ----------
 def main(args):
     paths, cls = list_images(args.aligned_dir)
     if not paths:
@@ -87,16 +84,13 @@ def main(args):
             pickle.dump({"classifier": clf, "class_names": class_names}, f)
         print("Trained on", len(paths), "images across", len(class_names), "classes")
         print("Saved:", args.out_pickle)
-        print("classes:", class_names)  # <- prints full class list
+        print("classes:", class_names)  
     else:
-        # Evaluate with existing classifier (compare NAMES, not indices)
         with open(args.out_pickle, "rb") as f:
             ckpt = pickle.load(f)
         clf = ckpt["classifier"]
         train_class_names = ckpt["class_names"]
         train_name_to_idx = {n: i for i, n in enumerate(train_class_names)}
-
-        # Keep only eval samples whose class exists in the TRAINED classifier
         keep_mask = [c in train_name_to_idx for c in cls]
         paths_kept = [p for p, m in zip(paths, keep_mask) if m]
         cls_kept   = [c for c, m in zip(cls, keep_mask) if m]
@@ -108,11 +102,9 @@ def main(args):
         with sess.as_default(), g.as_default():
             X_eval = embed_paths(sess, t, paths_kept, batch=args.batch, size=args.image_size)
 
-        # Predict -> names
-        pred_idx  = clf.predict(X_eval)  # indices in training space
+        pred_idx  = clf.predict(X_eval)  
         pred_name = [train_class_names[i] for i in pred_idx]
 
-        # Compare true name vs predicted name
         y_true_name = np.array(cls_kept)
         y_pred_name = np.array(pred_name)
         acc = (y_true_name == y_pred_name).mean()
@@ -121,7 +113,6 @@ def main(args):
               f"(kept {len(paths_kept)} that matched trained classes)")
         print("Overall accuracy:", f"{acc:.4f}")
 
-        # Simple per-class accuracy (only over kept classes)
         from collections import defaultdict
         correct, total = defaultdict(int), defaultdict(int)
         for tname, pname in zip(y_true_name, y_pred_name):
@@ -150,3 +141,4 @@ if __name__ == "__main__":
     ap.add_argument("--is_train", action="store_true", help="train mode (default eval)")
     args = ap.parse_args()
     main(args)
+
