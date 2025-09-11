@@ -101,12 +101,8 @@ Place your raw images into data/raw/<PersonName>/*.jpg.
 Data i used: https://www.kaggle.com/datasets/jessicali9530/lfw-dataset/code 
 Run this command, it creates the aligned faces in data\aligned
 ```bash
-docker run --rm -it -v ${PWD}:/app -w /app facenet-pipeline \
-bash -lc "python medium_facenet/preprocess.py \
-  --input_dir data/raw/lfw-deepfunneled \
-  --output_dir data/aligned \
-  --landmark_path medium_facenet/shape_predictor_68_face_landmarks.dat \
-  --image_size 160 --upsample 1"
+docker run --rm -it -v ${PWD}:/app -w /app facenet-pipeline bash -lc "python medium_facenet/preprocess.py --input_dir data/raw/lfw-deepfunneled --output_dir data/aligned --landmark_path medium_facenet/shape_predictor_68_face_landmarks.dat --image_size 160 --upsample 1"
+
 ```
 ### 3. Train the classifier
 Run this Command, post training the classifier will be saved to etc/facenet_svm.pkl and print the list of trained classes (identities)
