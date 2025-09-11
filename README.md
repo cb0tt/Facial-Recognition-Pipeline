@@ -126,7 +126,7 @@ docker run --rm -it -v ${PWD}:/app -w /app facenet-pipeline bash -lc "python med
 
 ```
 ##### Example Output:
-My output ** The more images/ the lower the amount of original data the classifier had to train off of, the lower the accuracies 
+My output:
 'Evaluated on 6 images
 Overall accuracy: 1.0000
 
@@ -134,7 +134,7 @@ Sample per-class accuracy :
 Bill_Gates                     1.000 (2 samples)
 Michael_Jackson                1.000 (2 samples)
 Tom_Hanks                      1.000 (2 samples)'
-### As the number and diversity of evaluation images increases, you get a more realistic and robust measure of accuracy. So if we increase the sample size...
+### The more images/ the lower the amount of original data the classifier had to train off of, but you get a more realistic and measure of accuracy. So if we increase the sample size...
 -More variability (lighting, pose, occlusion, background).
 
 -More opportunities for mistakes (especially between lookalike people).
