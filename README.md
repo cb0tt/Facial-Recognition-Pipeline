@@ -36,7 +36,7 @@ This pipeline demonstrates the end-to-end process of building a face recognition
 
 ---
 
-## 🛠️ Tools (use Python 3.6-3.7)
+## 🛠️ Tools used
 - **Docker** → reproducible environment to run TensorFlow and dependencies  
 - **TensorFlow** → neural network graph and computes embeddings
 - **dlib** → face detection & facial landmark alignment  
@@ -46,7 +46,7 @@ This pipeline demonstrates the end-to-end process of building a face recognition
 ## 📁 Directory Setup (Required Folders)
 make sure the following directories exist in the project root:
 
-## data/ → All Image Data (Input/Output)
+### data/ → All Image Data (Input/Output)
 
 This folder is where your raw images, aligned faces, and new test images live.
 You are expected to structure it like this:
@@ -59,7 +59,7 @@ data/
 ├── aligned_new/       # Aligned output of test images 
 ├── new_images/        # Pre aligned images
 
-## etc/ → Model & Classifier Storage
+### etc/ → Model & Classifier Storage
 
 This folder stores: The FaceNet model (.pb) you download, The trained Classifier 
 
@@ -67,16 +67,16 @@ This folder stores: The FaceNet model (.pb) you download, The trained Classifier
 Example model: 20180408-102900.pb
 Saved classifier: facenet_svm.pkl
 
-### 📥 How to Download 
+## 📥 How to Download 
 
 Before training or evaluating, download the following files and place them in the correct directories:
 
-#### 🔹 1. FaceNet Pretrained Model (.pb)
+### 🔹 1. FaceNet Pretrained Model (.pb)
 Download:  
  📎 [20180408-102900.pb](http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2)
 📁 Place into: `etc/20180408-102900/`
 
-### 🔹 2. dlib 68-Point Shape Predictor
+## 🔹 2. dlib 68-Point Shape Predictor
 - Source: [dlib model download page (SourceForge)](https://sourceforge.net/projects/dclib/files/)
 - File to download: `shape_predictor_68_face_landmarks.dat.bz2`
 ---
@@ -85,9 +85,9 @@ Download:
 Run below command,
 ```bash
 git clone https://github.com/cb0tt/Facial-Recognition-Pipeline.git
-cd Facial-Recognition-Pipeline
+cd your/file/path/Facial-Recognition-Pipeline
 ```
-#### 1B.  Build the Docker Image
+### 1B.  Build the Docker Image
 Build the image locally, run:
 ```bash
 docker build -t facenet-pipeline .
