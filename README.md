@@ -140,7 +140,5 @@ Tom_Hanks                      1.000 (2 samples)'
 ---
 ## Final Thoughts
 This project successfully combined machine learning (SVM) with deep learning feature extraction (FaceNet) in a fully containerized pipeline. By aligning face images, generating embeddings, and enforcing identity thresholds during training, we created a repeatable system for facial recognition and evaluation. The use of Docker ensures that anyone can reproduce results reliably, making this pipeline practical for both experimentation and deployment.
-#### 🙏 Acknowledgments
-This project was originally inspired by [Cole Murray's facial recognition pipeline tutorial](https://hackernoon.com/building-a-facial-recognition-pipeline-with-deep-learning-in-tensorflow-66e7645015b8).
 
 
