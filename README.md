@@ -88,8 +88,8 @@ Download:
 ### 1A. Clone the repository
 Run below command,
 ```bash
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
+git clone https://github.com/cb0tt/Facial-Recognition-Pipeline.git
+cd Facial-Recognition-Pipeline
 ```
 #### 1B.  Build the Docker Image
 Build the image locally, run:
