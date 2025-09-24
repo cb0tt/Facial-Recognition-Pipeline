@@ -61,11 +61,7 @@ data/
 
 ## etc/ → Model & Classifier Storage
 
-This folder stores:
-
-The FaceNet model (.pb) you download
-
-The trained Classifier 
+This folder stores: The FaceNet model (.pb) you download, The trained Classifier 
 
 ⚠️ These files are too large to upload to GitHub, so they must be downloaded manually.
 Example model: 20180408-102900.pb
