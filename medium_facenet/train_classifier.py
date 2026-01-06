@@ -108,7 +108,7 @@ def main(args):
             pickle.dump({"classifier": clf, "class_names": class_names}, f)
         print("Trained on", len(paths), "images across", len(class_names), "classes")
         print("Saved:", args.out_pickle)
-        print("classes:", class_names)  # <- prints full class list
+        print("classes:", class_names) 
     else:
         with open(args.out_pickle, "rb") as f:
             ckpt = pickle.load(f)
@@ -117,7 +117,6 @@ def main(args):
 
         g, sess, t = load_facenet(args.model_path)
         with sess.as_default(), g.as_default():
-            # Predict identities for images under aligned_dir (recursive). No "accuracy" is computed here.
             paths = list_images_recursive(args.aligned_dir)
             if not paths:
                 raise SystemExit(f"No images found in: {args.aligned_dir}")
