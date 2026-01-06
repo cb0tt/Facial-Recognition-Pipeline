@@ -1,6 +1,6 @@
 # Facial Recognition Pipeline (FaceNet + SVM)
 
-This repo aligns faces with dlib, generates FaceNet embeddings, trains a linear SVM classifier, and predicts identities for new images.
+This repo aligns faces with dlib, extracts embeddings with TensorFlow, trains a linear SVM classifier, and predicts identities for new images.
 
 ## Requirements
 
