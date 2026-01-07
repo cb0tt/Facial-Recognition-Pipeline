@@ -5,7 +5,7 @@ This repo aligns faces with dlib, extracts embeddings with TensorFlow, trains a 
 ## Requirements
 
 - Docker Desktop (Linux containers / WSL2 engine)
-- A FaceNet `.pb` graph file (example path used below: `etc/20180408-102900/20180408-102900.pb`)
+- A FaceNet `.pb` graph file
 
 ## Expected folders
 
